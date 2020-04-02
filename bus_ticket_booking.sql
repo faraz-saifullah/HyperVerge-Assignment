@@ -60,10 +60,10 @@ CREATE TABLE public.bus_info (
 ALTER TABLE public.bus_info OWNER TO postgres;
 
 --
--- Name: logs; Type: TABLE; Schema: public; Owner: postgres
+-- Name: ticket_logs; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.logs (
+CREATE TABLE public.ticket_logs (
     id integer NOT NULL,
     from_city character varying(20) NOT NULL,
     to_city character varying(20) NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE public.logs (
 );
 
 
-ALTER TABLE public.logs OWNER TO postgres;
+ALTER TABLE public.ticket_logs OWNER TO postgres;
 
 --
 -- Name: logs_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -96,7 +96,7 @@ ALTER TABLE public.logs_id_seq OWNER TO postgres;
 -- Name: logs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.logs_id_seq OWNED BY public.logs.id;
+ALTER SEQUENCE public.logs_id_seq OWNED BY public.ticket_logs.id;
 
 
 --
@@ -158,7 +158,7 @@ ALTER SEQUENCE public.users_user_id_seq OWNED BY public.users.user_id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.logs ALTER COLUMN id SET DEFAULT nextval('public.logs_id_seq'::regclass);
+ALTER TABLE ONLY public.ticket_logs ALTER COLUMN id SET DEFAULT nextval('public.logs_id_seq'::regclass);
 
 
 --
@@ -188,14 +188,7 @@ COPY public."SequelizeMeta" (name) FROM stdin;
 --
 
 COPY public.bus_info (registration_number, model, seats, base_city, route) FROM stdin;
-\.
-
-
---
--- Data for Name: logs; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.logs (id, from_city, to_city, date, "time", traveller_id, seat_number, booking_status, trip_code) FROM stdin;
+MH-20-X-1234	Mercedes	40	Pune	{pune,bangalore}
 \.
 
 
@@ -204,6 +197,14 @@ COPY public.logs (id, from_city, to_city, date, "time", traveller_id, seat_numbe
 --
 
 SELECT pg_catalog.setval('public.logs_id_seq', 1, false);
+
+
+--
+-- Data for Name: ticket_logs; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.ticket_logs (id, from_city, to_city, date, "time", traveller_id, seat_number, booking_status, trip_code) FROM stdin;
+\.
 
 
 --
@@ -220,6 +221,7 @@ COPY public.trips (trip_code, from_city, to_city, date, booked_seats, stops, reg
 
 COPY public.users (user_id, name, email, phone, type, password) FROM stdin;
 1	admin	admin@bus.com	100	admin	admin@123
+2	traveller1	traveller1@bus.com	12345	traveller	\N
 \.
 
 
@@ -227,7 +229,7 @@ COPY public.users (user_id, name, email, phone, type, password) FROM stdin;
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_user_id_seq', 1, true);
+SELECT pg_catalog.setval('public.users_user_id_seq', 9, true);
 
 
 --
@@ -250,7 +252,7 @@ ALTER TABLE ONLY public.bus_info
 -- Name: logs_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.logs
+ALTER TABLE ONLY public.ticket_logs
     ADD CONSTRAINT logs_pkey PRIMARY KEY (id);
 
 
@@ -282,7 +284,7 @@ ALTER TABLE ONLY public.trips
 -- Name: driver_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.logs
+ALTER TABLE ONLY public.ticket_logs
     ADD CONSTRAINT driver_id FOREIGN KEY (traveller_id) REFERENCES public.users(user_id);
 
 
@@ -298,7 +300,7 @@ ALTER TABLE ONLY public.trips
 -- Name: trip_code; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.logs
+ALTER TABLE ONLY public.ticket_logs
     ADD CONSTRAINT trip_code FOREIGN KEY (trip_code) REFERENCES public.trips(trip_code);
 
 
@@ -315,4 +317,3 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
-
