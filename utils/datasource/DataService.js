@@ -1,5 +1,5 @@
 const Pg = require('pg');
-const DatabaseConfig = require('../../Config.json');
+const DatabaseConfig = require('../../Config.json').PostgresDatabase;
 
 class DataService {
 	async executeQuery(sqlQuery) {

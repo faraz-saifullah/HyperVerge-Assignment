@@ -1,31 +1,16 @@
 {
-	"name": "hyperverge-assignment",
-	"version": "0.0.0",
-	"private": true,
-	"description": "Bus ticket booking assignment for HyperVerge",
-	"main": "app.js",
-	"homepage": "https://github.com/faraz-saifullah/HyperVerge-Assignment#readme",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "node ./bin/www"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/faraz-saifullah/HyperVerge-Assignment.git"
-	},
-	"author": "Faraz Saifullah",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/faraz-saifullah/HyperVerge-Assignment/issues"
-	},
-	"dependencies": {
-		"cookie-parser": "~1.4.4",
-		"debug": "~2.6.9",
-		"express": "~4.16.1",
-		"http-errors": "~1.6.3",
-		"jade": "~1.11.0",
-		"morgan": "~1.9.1",
-		"nodemon": "^2.0.2",
-		"pg": "^7.18.2"
-	}
+  "name": "hyperverge-assignment",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.1"
+  }
 }
