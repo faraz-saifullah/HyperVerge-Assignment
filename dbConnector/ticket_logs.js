@@ -9,25 +9,25 @@ class TicketLogsDbConnector {
             values: [ticketDetails.from, ticketDetails.to, ticketDetails.user_id, 
             ticketDetails.seat_number, 'confirmed', ticketDetails.trip_code]
         };
-        console.log(sqlQuery);
         return await new DataService().executeQueryAsPromise(sqlQuery, true);
     }
-    
-    async selectTripWithCode(tripCode) {
 
+    async updateTicketStatus(ticketId) {
         const sqlQuery = {
-            text: `SELECT * FROM trips where trip_code = ($1)`,
-            values: [tripCode]
+            text: `UPDATE ticket_logs SET 
+            (booking_status, cancel_date, cancel_time) = ($1, 
+                (select current_date), (select current_time)) WHERE id = ($2)`,
+            values: ['cancelled', ticketId]
+        }
+        return await new DataService().executeQueryAsPromise(sqlQuery, true);
+    }
+
+    async selectTicketWithId(ticketId) {
+        const sqlQuery = {
+            text: `SELECT * from ticket_logs WHERE id = ($1)`,
+            values: [ticketId]
         }
         return await new DataService().executeQueryAsPromise(sqlQuery);
-    }
-
-    async updateBookedSeats(tripDetails) {
-        const sqlQuery = {
-            text: `UPDATE trips SET (booked_seats) = ($1) where trip_code = ($2)`,
-            values: [tripDetails.booked_seats, tripDetails.trip_code]
-        };
-        return await new DataService().executeQueryAsPromise(sqlQuery, true);
     }
 }
 
