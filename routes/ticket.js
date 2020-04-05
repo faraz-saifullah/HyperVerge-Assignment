@@ -8,4 +8,9 @@ router.post('/', async function(req, res) {
   return new APIResponseHandler().handle(res, result);
 });
 
+router.delete('/:id', async function(req, res) {
+  let result = await new Tickets().cancelTicket(req.params.id);
+  return new APIResponseHandler().handle(res, result);
+});
+
 module.exports = router;
