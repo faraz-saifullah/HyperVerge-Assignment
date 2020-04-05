@@ -10,7 +10,6 @@ class UsersDbConnector {
     }
 
     async selectUserWithPhone(phoneNumber) {
-
         const sqlQuery = {
             text: `SELECT * FROM users where phone = ($1)`,
             values: [phoneNumber]

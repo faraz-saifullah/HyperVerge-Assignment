@@ -12,7 +12,6 @@ class TripsDbConnector {
     }
 
     async selectTripWithCode(tripCode) {
-
         const sqlQuery = {
             text: `SELECT * FROM trips where trip_code = ($1)`,
             values: [tripCode]

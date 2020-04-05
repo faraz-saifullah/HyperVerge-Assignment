@@ -39,6 +39,10 @@ class TicketController {
             throw err;
         }
     }
+
+    async getTicketInfo(ticketId) {
+        return await this.ticketLogsDbConnector.selectTicketWithId(ticketId);
+    }
 }
 
 module.exports = TicketController;

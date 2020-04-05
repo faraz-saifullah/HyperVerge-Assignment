@@ -13,4 +13,9 @@ router.delete('/:id', async function(req, res) {
   return new APIResponseHandler().handle(res, result);
 });
 
+router.get('/:id', async function(req, res) {
+  let result = await new Tickets().getTicketInfo(req.params.id);
+  return new APIResponseHandler().handle(res, result);
+});
+
 module.exports = router;
