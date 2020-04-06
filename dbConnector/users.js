@@ -16,6 +16,14 @@ class UsersDbConnector {
         }
         return await new DataService().executeQueryAsPromise(sqlQuery);
     }
+
+    async selectAdminWithCredentials(phone, password) {
+        const sqlQuery = {
+            text: `SELECT * FROM users where phone = ($1) and password = ($2) and type = ($3)`,
+            values: [phone, password, 'admin']
+        }
+        return await new DataService().executeQueryAsPromise(sqlQuery);
+    }
 }
 
 module.exports = UsersDbConnector;

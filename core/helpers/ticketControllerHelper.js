@@ -7,6 +7,11 @@ class TicketControllerHelper {
         this.usersDbConnector = new UsersDbConnector();
     }
 
+    async checkIfAdminExist(phone, password) {
+        let result = await this.usersDbConnector.selectAdminWithCredentials(phone, password);
+        return result.success;
+    }
+
     async createUserIfNotExist(details) {
         let existingUser = await this.usersDbConnector.selectUserWithPhone(details.phone);
         if(!existingUser.success) {
@@ -81,10 +86,10 @@ class TicketControllerHelper {
         return dateString;
     }
 
-    createTripCode(details) {
-        let dateString = this.getDateString(details.date);
-        let route = details.from.substring(0, 2);
-        route += details.to.substring(0, 2);
+    createTripCode(date, from, to) {
+        let dateString = this.getDateString(date);
+        let route = from.substring(0, 2);
+        route += to.substring(0, 2);
         return dateString + route;
     }
 }

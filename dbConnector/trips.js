@@ -26,6 +26,14 @@ class TripsDbConnector {
         };
         return await new DataService().executeQueryAsPromise(sqlQuery, true);
     }
+
+    async cancelTrips(tripCode) {
+        const sqlQuery = {
+            text: `UPDATE trips SET booked_seats = ($1) where trip_code > ($2)`,
+            values: [[] ,tripCode]
+        }
+        return await new DataService().executeQueryAsPromise(sqlQuery, true);
+    }
 }
 
 module.exports = TripsDbConnector;
