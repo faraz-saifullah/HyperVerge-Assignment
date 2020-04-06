@@ -40,6 +40,15 @@ class TicketLogsDbConnector {
         }
         return await new DataService().executeQueryAsPromise(sqlQuery);
     }
+
+    async selectAllConfirmedTickets() {
+        const sqlQuery = {
+            text: `SELECT (id, trip_code, from_city, to_city, booking_date, traveller_id,
+                seat_number) from ticket_logs WHERE ticket_status = ($1)`,
+            values: ['confirmed']
+        }
+        return await new DataService().executeQueryAsPromise(sqlQuery);
+    }
 }
 
 module.exports = TicketLogsDbConnector;

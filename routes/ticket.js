@@ -23,4 +23,9 @@ router.delete('/', async function(req, res) {
   return new APIResponseHandler().handle(res, result);
 });
 
+router.get('/', async function(req, res) {
+  let result = await new Tickets().getAllClosedTickets();
+  return new APIResponseHandler().handle(res, result);
+});
+
 module.exports = router;
