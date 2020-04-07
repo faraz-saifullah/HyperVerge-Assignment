@@ -1,0 +1,228 @@
+{
+	"info": {
+		"_postman_id": "ef270c62-dc08-46e3-ab0d-8927ef4e76f1",
+		"name": "BusBooking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Book New Ticket",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "phone",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "date",
+							"value": "02-12-2019",
+							"type": "text"
+						},
+						{
+							"key": "from",
+							"value": "source",
+							"type": "text"
+						},
+						{
+							"key": "to",
+							"value": "destination",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "travel",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "tr3@bus.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "ec2-18-222-88-137.us-east-2.compute.amazonaws.com:3000/tickets/",
+					"host": [
+						"ec2-18-222-88-137",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3000",
+					"path": [
+						"tickets",
+						""
+					],
+					"query": [
+						{
+							"key": "phone",
+							"value": "12345",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Used to book new ticket\n\nBody should contain the following\n1. Date\n2. Source\n3. Destinaion\n4. Traveller's Phone\n5. Traveller's Email\n6. Traveller's Name"
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel Ticket",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "ec2-18-222-88-137.us-east-2.compute.amazonaws.com:3000/tickets/25",
+					"host": [
+						"ec2-18-222-88-137",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3000",
+					"path": [
+						"tickets",
+						"25"
+					]
+				},
+				"description": "This is to cancel a confirmed ticket\n\nRequest must contain ticketId in request parameters"
+			},
+			"response": []
+		},
+		{
+			"name": "Check Ticket Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "ec2-18-222-88-137.us-east-2.compute.amazonaws.com:3000/tickets/23",
+					"host": [
+						"ec2-18-222-88-137",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3000",
+					"path": [
+						"tickets",
+						"23"
+					]
+				},
+				"description": "This API is to check the ticket status and ticket info\n\nRequest must contain ticketId in request parameters"
+			},
+			"response": []
+		},
+		{
+			"name": "Admin's Reset",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "phone",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin@123",
+							"type": "text"
+						},
+						{
+							"key": "date",
+							"value": "10-11-2019",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "ec2-18-222-88-137.us-east-2.compute.amazonaws.com:3000/tickets/",
+					"host": [
+						"ec2-18-222-88-137",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3000",
+					"path": [
+						"tickets",
+						""
+					]
+				},
+				"description": "This API is for Admin to reset the servers i.e open all tickets"
+			},
+			"response": []
+		},
+		{
+			"name": "View All Closed Tickets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "ec2-18-222-88-137.us-east-2.compute.amazonaws.com:3000/tickets/",
+					"host": [
+						"ec2-18-222-88-137",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3000",
+					"path": [
+						"tickets",
+						""
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "closed",
+							"disabled": true
+						}
+					]
+				},
+				"description": "This API is used to view all the closed/confirmed tickets\n\nThe data returned contains ticket id, trip code, source city, destination city, booking date, traveller id and seat number in that order"
+			},
+			"response": []
+		}
+	]
+}
