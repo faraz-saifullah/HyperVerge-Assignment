@@ -21,7 +21,7 @@ class TripsDbConnector {
 
     async updateBookedSeats(tripDetails) {
         const sqlQuery = {
-            text: `UPDATE trips SET (booked_seats) = ($1) where trip_code = ($2)`,
+            text: `UPDATE trips SET booked_seats = ($1) where trip_code = ($2)`,
             values: [tripDetails.booked_seats, tripDetails.trip_code]
         };
         return await new DataService().executeQueryAsPromise(sqlQuery, true);
