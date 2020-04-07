@@ -54,6 +54,10 @@ class TicketController {
             return await this.ticketLogsDbConnector.declineTickets(tripCode, 'declined');
         }
     }
+
+    async getAllClosedTickets() {
+        return await this.ticketLogsDbConnector.selectAllConfirmedTickets();
+    }
 }
 
 module.exports = TicketController;
