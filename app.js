@@ -1,13 +1,14 @@
+'use strict';
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-let indexRouter = require('./routes/index');
+var indexRouter = require('./routes/index');
 // let travellerRouter = require('./routes/traveller');
 // let adminRouter = require('./routes/admin');
-let ticketsRouter = require('./routes/ticket');
+var ticketsRouter = require('./routes/ticket');
 
 var app = express();
 
